@@ -5,7 +5,7 @@ from .models import Product, CustomUser, Cart, CartItem, OrderItem, Order
 class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['username', 'password', 'email']
+        fields = ['username', 'first_name', 'last_name', 'password', 'email', 'phone_number', 'address']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
