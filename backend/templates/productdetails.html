@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="images/company-logo.png" alt="Company Logo"></a>
+        </div>
+        <nav>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="cart.html">Cart <span id="cart-count">0</span></a>
+        </nav>
+    </header>
+
+    <main>
+    
+        <!--The details on this page need to be filled in from our database based ID of the product that was clicked-->
+        <div class="details-container">
+            <div class="detail-item">
+                <div class="detail-info">
+                    <img src="images/product.jpg" alt="Product 1">
+                    <div class="details">
+                        <h4 class="pname">Product Name</h4>
+                        <p>Product ID: 12345</p>
+                        <p>Description that is a couple of bullet points or a paragraph</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-summary">
+                <h2 class="price">Price: $00.00</h2>
+                <p class="stock-num">In Stock</p>
+                <div class="quantity-actions">
+                    <button class="decrement">-</button>
+                    <input class="quantity" type="number" value="1" min="1">
+                    <button class="increment">+</button>
+                </div>
+                <button>Add To Cart</button>
+            </div>
+        </div>
+        <!--End of details section-->
+</main>
+
+    <footer>
+        <p>&copy; Company Name</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

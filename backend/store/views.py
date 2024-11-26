@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Product, Cart, CartItem, Order, OrderItem
+from .models import Product, Cart, CartItem, Order, OrderItem, CustomUser
 from .serializers import ProductSerializer, UserRegistrationSerializer, CartSerializer, CartItemSerializer, \
     OrderSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -162,3 +166,42 @@ class RetrieveOrderAPIView(APIView):
 
         except Order.DoesNotExist:
             return Response({"error": "Order not found or unauthorized access"}, status=status.HTTP_404_NOT_FOUND)
+
+
+def index(request):
+  template = 'index.html'
+  products = Product.objects.all()
+  return render(request, template, {'products': products})
+
+def signup(request):
+  template = 'signup.html'
+  return render(request, template)
+
+# Define a view function for the login page
+def login_page(request):
+    # Check if the HTTP request method is POST (form submission)
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # Check if a user with the provided username exists
+        if not CustomUser.objects.filter(username=username).exists():
+            # Display an error message if the username does not exist
+            messages.error(request, 'Invalid Username')
+
+        
+        # Authenticate the user with the provided username and password
+        user = authenticate(username=username, password=password)
+        
+        if user is None:
+            # Display an error message if authentication fails (invalid password)
+            messages.error(request, "Invalid Password")
+
+        else:
+            # Log in the user and redirect to the home page upon successful login
+            login(request, user)
+            return HttpResponseRedirect('/store/index.html')
+    
+    # Render the login page template (GET request)
+    return render(request, 'login.html')
+

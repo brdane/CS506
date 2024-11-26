@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="{% static 'images/company-logo.png' %}" alt="Company Logo"></a>
+        </div>
+        <nav>
+            {% if user.is_authenticated %}
+                <p>Welcome, {{ user.username }}!</p>
+            {% endif %}
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="cart.html">Cart<span id="cart-count">0</span></a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Products</h1>
+
+        <section class="product-grid">
+
+            {% for product in products %}
+                <div class="product">
+                    <div class = "img-container" onclick="location.href='productdetails.html';">
+                        <img src="{{product.image.url}}" alt={{product.title}} >
+                    </div>
+                    <h3>{{product.title}}</h3>
+                    <p>$ {{product.price}}</p>
+                    <div class="quantity-actions">
+                        <button class="decrement">-</button>
+                        <input class="quantity" type="number" value="1" min="1">
+                        <button class="increment">+</button>
+                    </div>
+                    <button data-product-id="{{product.id}}" class="add-to-cart-btn">Add To Cart</button>
+                </div>
+            {% endfor %}
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Company Name</p>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
