@@ -176,14 +176,19 @@ class RetrieveOrderAPIView(APIView):
 
 def index(request):
   template = 'index.html'
+  """
   products = Product.objects.all()
-  return render(request, template, {'products': products})
+  {'products': products}
+  """
+  return render(request, template)
 
 def view_cart(request):
-    #cart_items = CartItem.objects.filter(cart_id=request.user.id)
-    cart_items = CartItem.objects.all()
+    """
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_items = CartItem.objects.filter(cart = cart)
     context = {'cart_items': cart_items}
-    return render(request, 'cart.html', context)
+    """
+    return render(request, 'cart.html')
 
 def signup(request):
   template = 'signup.html'
@@ -191,34 +196,11 @@ def signup(request):
 
 # Define a view function for the login page
 def login_page(request):
-    """
-    # This code was replaced with a JavaScript version capable of authentication
-    # Check if the HTTP request method is POST (form submission)
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        # Check if a user with the provided username exists
-        if not CustomUser.objects.filter(username=username).exists():
-            # Display an error message if the username does not exist
-            messages.error(request, 'Invalid Username')
-
-        
-        # Authenticate the user with the provided username and password
-        user = authenticate(username=username, password=password)
-        
-        if user is None:
-            # Display an error message if authentication fails (invalid password)
-            messages.error(request, "Invalid Password")
-
-        else:
-            # Log in the user and redirect to the home page upon successful login
-            login(request, user)
-            
-            return HttpResponseRedirect('/store/index.html')
-    """
-    # Render the login page template (GET request)
     return render(request, 'login.html')
+
+# Define a view function for the login page
+def product_details(request):
+    return render(request, 'productdetails.html')
 
 
 class MyTokenObtainPairView(TokenObtainPairView):

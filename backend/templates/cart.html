@@ -24,14 +24,14 @@
     
     <div class="cart-container">
         <section class="cart-items">
-
+<!--
             {% for item in cart_items %}
             <div class="cart-item">
                 <div class="product-info">
                     <img src="{{item.product.image.url}}" alt="{{item.product.title}}">
                     <div>
                         <h4>{{item.product.title}}</h4>
-                        <p>Product ID: 12345</p>
+                        <p>Product ID: {{item.product.id}}</p>
                         <p class="quantity">Quantity: {{item.quantity}}</p>
                         <p class="unit-price">Unit Price: ${{item.product.price}}</p>
                     </div>
@@ -45,15 +45,17 @@
                 <p class="price">$ </p>
             </div>
             {% endfor %}
-
+        -->
         </section>
 
         <!--Information here needs to be calculated based on items in cart-->
         <div class="cart-summary">
+            <!--
             <p class="subtotal">Subtotal: $00.00</p>
             <p class="shipping-cost">Shipping: $00.00</p>
             <p class="total-price">Total: $00.00</p>
-            <button class="checkout-button">Proceed to Checkout</button>
+            <button class="checkout-button">Checkout</button>
+        -->
         </div>
     </div>
 </main>

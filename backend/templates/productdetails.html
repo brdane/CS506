@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
-    <link rel="stylesheet" href="style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="index.html"><img src="images/company-logo.png" alt="Company Logo"></a>
+            <a href="index.html"><img src="{% static 'images/company-logo.png' %}" alt="Company Logo"></a>
         </div>
         <nav>
             <a href="login.html" id="nav-login-btn">Login</a>
@@ -21,7 +22,9 @@
     <main>
     
         <!--The details on this page need to be filled in from our database based ID of the product that was clicked-->
+        
         <div class="details-container">
+            <!--
             <div class="detail-item">
                 <div class="detail-info">
                     <img src="images/product.jpg" alt="Product 1">
@@ -43,7 +46,9 @@
                 </div>
                 <button>Add To Cart</button>
             </div>
+        -->
         </div>
+    
         <!--End of details section-->
 </main>
 
@@ -51,6 +56,7 @@
         <p>&copy; Company Name</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'script_productdetails.js' %}"></script>
 </body>
 </html>

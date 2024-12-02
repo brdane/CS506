@@ -1,3 +1,4 @@
+/*
 // Controls the quantity incrementers on each product
 function initializeQuantityActions() {
     const quantityActions = document.querySelectorAll('.quantity-actions');
@@ -26,10 +27,11 @@ function initializeQuantityActions() {
       });
     });
   }
+
   
 // Call the function to initialize all quantity actions on the page
 initializeQuantityActions();
-
+*/
 
 
 
@@ -41,13 +43,14 @@ const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
 addToCartBtns.forEach(button => {
   button.addEventListener('click', (event) => {
     button.innerHTML = "Added";
+    displayCartQuantity();
   });
 });
 
 
 
 
-
+/*
 // Adds appropriate actions to the add to cart buttons
 function addToCartInitializer() {
   
@@ -55,7 +58,6 @@ function addToCartInitializer() {
   if (addToCartBtns) {
     addToCartBtns.forEach(button => {
       button.addEventListener('click', async (event) => {
-        event.preventDefault(); // Prevent default form submission
 
         const productId = button.dataset.productid; // Get product ID from data-attribute
         const quantity = parseInt(button.parentElement.querySelector('.quantity').value);
@@ -99,6 +101,7 @@ function addToCartInitializer() {
       const responseData = await response.json();
       // Process successful response (e.g., update cart quantity)
       console.log("Added to cart:", responseData);
+      displayCartQuantity();
       
   } catch (error) {
       console.error("Fetch error:", error);
@@ -111,7 +114,7 @@ function addToCartInitializer() {
 
 // Call the function
 addToCartInitializer()
-
+*/
 
 
 // Update the cart quantity span element in the nav section

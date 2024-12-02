@@ -17,4 +17,5 @@ urlpatterns = [
     path('signup.html', views.signup, name='signup'),
     path('login.html', views.login_page, name='login'),
     path('cart.html', views.view_cart, name='cart'),
+    path('productdetails.html', views.product_details, name='product_details'),
 ]
