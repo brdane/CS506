@@ -13,10 +13,11 @@
             <a href="index.html"><img src="{% static 'images/company-logo.png' %}" alt="Company Logo"></a>
         </div>
         <nav>
-            {% if user.is_authenticated %}
-                <p>Welcome, {{ user.username }}!</p>
-            {% endif %}
-            <a href="login.html">Login</a>
+            <!--{% if user.is_authenticated %}-->
+                <!--<p>Welcome, {{ user.username }}!</p>-->
+            <!--{% endif %}-->
+            <p id="user-greeting"></p>
+            <a href="login.html" id="nav-login-btn">Login</a>
             <a href="signup.html">Sign Up</a>
             <a href="cart.html">Cart<span id="cart-count">0</span></a>
         </nav>
@@ -39,7 +40,7 @@
                         <input class="quantity" type="number" value="1" min="1">
                         <button class="increment">+</button>
                     </div>
-                    <button data-product-id="{{product.id}}" class="add-to-cart-btn">Add To Cart</button>
+                    <button data-productid="{{product.id}}" class="add-to-cart-btn">Add To Cart</button>
                 </div>
             {% endfor %}
 

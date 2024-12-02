@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
-    <link rel="stylesheet" href="style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="index.html"><img src="images/company-logo.png" alt="Company Logo"></a>
+            <a href="index.html"><img src="{% static 'images/company-logo.png' %}" alt="Company Logo"></a>
         </div>
         <nav>
-            <a href="login.html">Login</a>
+            <a href="login.html" id="nav-login-btn">Login</a>
             <a href="signup.html">Sign Up</a>
             <a href="cart.html">Cart <span id="cart-count">0</span></a>
         </nav>
@@ -23,47 +24,28 @@
     
     <div class="cart-container">
         <section class="cart-items">
-            <!--DEMO code start-->
-            <!--This code will be needed to be generated dynamically with a Python loop to display products in cart-->
-            <div class="cart-item">
-                <div class="product-info">
-                    <img src="images/product.jpg" alt="Product 1">
-                    <div>
-                        <h4>Product Name</h4>
-                        <p>Product ID: 12345</p>
-                        <p>Quantity: 1</p>
-                        <p>Unit Price: $19.99</p>
-                    </div>
-                </div>
-                <div class="quantity-actions">
-                    <button class="remove">Remove</button>
-                    <button class="decrement">-</button>
-                    <input class="quantity" type="number" value="1" min="1">
-                    <button class="increment">+</button>
-                </div>
-                <p class="price">$19.99</p>
-            </div>
-            <!--END of Python code snippet-->
 
+            {% for item in cart_items %}
             <div class="cart-item">
                 <div class="product-info">
-                    <img src="images/product.jpg" alt="Product 1">
+                    <img src="{{item.product.image.url}}" alt="{{item.product.title}}">
                     <div>
-                        <h4>Product Name</h4>
+                        <h4>{{item.product.title}}</h4>
                         <p>Product ID: 12345</p>
-                        <p>Quantity: 1</p>
-                        <p>Unit Price: $19.99</p>
+                        <p class="quantity">Quantity: {{item.quantity}}</p>
+                        <p class="unit-price">Unit Price: ${{item.product.price}}</p>
                     </div>
                 </div>
                 <div class="quantity-actions">
                     <button class="remove">Remove</button>
                     <button class="decrement">-</button>
-                    <input class="quantity" type="number" value="1" min="1">
+                    <input class="quantity" type="number" value="{{item.quantity}}" min="1">
                     <button class="increment">+</button>
                 </div>
-                <p class="price">$19.99</p>
+                <p class="price">$ </p>
             </div>
-            <!--END of DEMO code-->
+            {% endfor %}
+
         </section>
 
         <!--Information here needs to be calculated based on items in cart-->
@@ -80,6 +62,7 @@
         <p>&copy; Company Name</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'cart.js' %}"></script>
 </body>
 </html>

@@ -27,8 +27,10 @@ function initializeQuantityActions() {
     });
   }
   
-  // Call the function to initialize all quantity actions on the page
-  initializeQuantityActions();
+// Call the function to initialize all quantity actions on the page
+initializeQuantityActions();
+
+
 
 
 
@@ -45,10 +47,103 @@ addToCartBtns.forEach(button => {
 
 
 
+
+// Adds appropriate actions to the add to cart buttons
+function addToCartInitializer() {
+  
+  // Manage the add to cart logic
+  if (addToCartBtns) {
+    addToCartBtns.forEach(button => {
+      button.addEventListener('click', async (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const productId = button.dataset.productid; // Get product ID from data-attribute
+        const quantity = parseInt(button.parentElement.querySelector('.quantity').value);
+        console.log(productId);
+    
+        const data = {
+          product_id: productId,
+          quantity: quantity
+        };
+
+
+  // Get the token (replace with your actual token storage)
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+      // Handle the case where the token is not available (redirect to login?)
+      alert("Please log in.");
+      window.location.href = '/store/login.html'; // Example redirect
+      return;
+  }
+
+
+  try {
+      const response = await fetch('/store/api/cart/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          },
+          body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+          // Handle other errors (e.g. 400, 500) appropriately
+          const errorData = await response.json();  // Attempt to parse error details
+          console.error("Error:", response.status, errorData);
+          alert("Failed to add to cart: " + (errorData?.detail || response.statusText)); // User-friendly error message
+          return; // Stop further processing
+      }
+
+      const responseData = await response.json();
+      // Process successful response (e.g., update cart quantity)
+      console.log("Added to cart:", responseData);
+      
+  } catch (error) {
+      console.error("Fetch error:", error);
+      alert("An error occurred while adding to cart.");
+  }
+  });
+  });
+  }
+}
+
+// Call the function
+addToCartInitializer()
+
+
+
+// Update the cart quantity span element in the nav section
+function displayCartQuantity() {
+  fetch('/store/api/cart/', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    },
+    })
+    .then(response => response.json())
+    .then(data => {
+      let totalItems = 0;
+      data.cart_items.forEach(item => {
+        totalItems += item.quantity;
+      });
+      document.getElementById('cart-count').textContent = totalItems;
+    })
+    .catch(error => {
+      console.error('Error fetching cart data:', error);
+    });
+  }
+  displayCartQuantity();
+
+
+
+
 // Manage the signup form information
 const signUpForm = document.querySelector('.sign-up'); 
 
-
+// If a signup form class is found add an event listener to the form
 if (signUpForm) {
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent default form submission
@@ -108,3 +203,36 @@ if (signUpForm) {
 }
 
 
+
+
+// Apply the user greeting to the navbar
+const userGreeting = document.getElementById("user-greeting");
+
+if (userGreeting) {
+  if (localStorage.getItem("username") != null) {
+    userGreeting.innerHTML = "Welcome, " + localStorage.getItem("username") + "!"
+  }
+}
+
+
+
+
+
+// Log the user out
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
+}
+
+const navLoginBtn = document.getElementById("nav-login-btn");
+if (navLoginBtn) {
+  if (localStorage.getItem("token") != null) {
+    navLoginBtn.innerHTML = "Logout";
+    navLoginBtn.addEventListener("click", function() {
+      logout();
+    }); 
+  }
+  else {
+    navLoginBtn.innerHTML = "Login";
+  }
+}

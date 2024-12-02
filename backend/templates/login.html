@@ -13,7 +13,7 @@
             <a href="index.html"><img src="{% static 'images/company-logo.png' %}" alt="Company Logo"></a>
         </div>
         <nav>
-            <a href="login.html">Login</a>
+            <a href="login.html" id="nav-login-btn">Login</a>
             <a href="signup.html">Sign Up</a>
             <a href="cart.html">Cart<span id="cart-count">0</span></a>
         </nav>
@@ -40,19 +40,19 @@
 
             <!-- Username input field -->
             <div class="form-group">
-                <label for="exampleInputEmail1">Username</label>
-                <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp"
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username-field" aria-describedby="emailHelp"
                     placeholder="Enter username" required>
             </div>
 
             <!-- Password input field -->
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password-field" placeholder="Password" required>
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="login-btn" class="btn btn-primary">Submit</button>
       </div>
     
       <div class="container" style="background-color:#f1f1f1">
@@ -68,5 +68,6 @@
   </footer>
 
   <script src="{% static 'script.js' %}"></script>
+  <script src="{% static 'login.js' %}"></script>
 </body>
 </html>

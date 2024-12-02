@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 from .models import Product, Cart, CartItem, Order, OrderItem, CustomUser
 from .serializers import ProductSerializer, UserRegistrationSerializer, CartSerializer, CartItemSerializer, \
     OrderSerializer
@@ -10,6 +11,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.http import HttpResponse
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import generics
+
 
 
 # Create your views here.
@@ -173,12 +179,20 @@ def index(request):
   products = Product.objects.all()
   return render(request, template, {'products': products})
 
+def view_cart(request):
+    #cart_items = CartItem.objects.filter(cart_id=request.user.id)
+    cart_items = CartItem.objects.all()
+    context = {'cart_items': cart_items}
+    return render(request, 'cart.html', context)
+
 def signup(request):
   template = 'signup.html'
   return render(request, template)
 
 # Define a view function for the login page
 def login_page(request):
+    """
+    # This code was replaced with a JavaScript version capable of authentication
     # Check if the HTTP request method is POST (form submission)
     if request.method == "POST":
         username = request.POST.get('username')
@@ -200,8 +214,23 @@ def login_page(request):
         else:
             # Log in the user and redirect to the home page upon successful login
             login(request, user)
+            
             return HttpResponseRedirect('/store/index.html')
-    
+    """
     # Render the login page template (GET request)
     return render(request, 'login.html')
 
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return super().post(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
