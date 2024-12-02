@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        // Fetch data from the backend
+        fetch('http://localhost:8000/api/data')
+          .then(response => response.json())
+          .then(data => {
+            console.log(data.message);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+    </script>
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="images/company-logo.png" alt="Company Logo"></a>
+        </div>
+        <nav>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="cart.html">Cart<span id="cart-count">0</span></a>
+        </nav>
+    </header>
+
+<main>
+    <h1>Products</h1>
+
+    <section class="product-grid" id="product-grid">
+        <!-- Products will be dynamically injected here -->
+    </section>
+</main>
+
+<footer>
+    <p>&copy; Company Name</p>
+</footer>
+
+<script src="script_index.js"></script>
+</body>
+</html>
