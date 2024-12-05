@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="{% static 'images/company-logo.png' %}" alt="Company Logo"></a>
+        </div>
+        <nav>
+            <a href="login.html" id="nav-login-btn">Login</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="cart.html">Cart<span id="cart-count">0</span></a>
+        </nav>
+    </header>
+
+  <main>
+    <!--Information from this form will need to be checked against the data in our database-->
+    <form action="{% url 'login' %}" method="post">
+      <div class="container">
+        {% csrf_token %}  <!-- CSRF token for security -->
+
+            <!-- Login heading -->
+            <h3 style="margin: 0 auto; text-align: center;">Login</h3>
+            <hr>
+
+            <!-- Display error/success messages -->
+            {% if messages %}
+            <div class="alert alert-primary" role="alert" style="color: red; font-weight: bold;">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Username input field -->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username-field" aria-describedby="emailHelp"
+                    placeholder="Enter username" required>
+            </div>
+
+            <!-- Password input field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password-field" placeholder="Password" required>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" id="login-btn" class="btn btn-primary">Submit</button>
+      </div>
+    
+      <div class="container" style="background-color:#f1f1f1">
+        <!--<button type="button" class="cancelbtn">Cancel</button>-->
+        <span class="containerlink">Don't have an account? <a href="signup.html">Sign Up</a></span>
+      </div>
+    </form>
+    <!--END OF FORM-->
+  </main>
+
+  <footer>
+      <p>&copy; Company Name</p>
+  </footer>
+
+  <script src="{% static 'script.js' %}"></script>
+  <script src="{% static 'login.js' %}"></script>
+</body>
+</html>

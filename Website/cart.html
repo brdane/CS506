@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="images/company-logo.png" alt="Company Logo"></a>
+        </div>
+        <nav>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="cart.html">Cart <span id="cart-count">0</span></a>
+        </nav>
+    </header>
+
+    <main>
+    <h1>Cart</h1>
+    
+    <div class="cart-container">
+        <section class="cart-items">
+            <!--DEMO code start-->
+            <!--This code will be needed to be generated dynamically with a Python loop to display products in cart-->
+            <div class="cart-item">
+                <div class="product-info">
+                    <img src="images/product.jpg" alt="Product 1">
+                    <div>
+                        <h4>Product Name</h4>
+                        <p>Product ID: 12345</p>
+                        <p>Quantity: 1</p>
+                        <p>Unit Price: $19.99</p>
+                    </div>
+                </div>
+                <div class="quantity-actions">
+                    <button class="remove">Remove</button>
+                    <button class="decrement">-</button>
+                    <input class="quantity" type="number" value="1" min="1">
+                    <button class="increment">+</button>
+                </div>
+                <p class="price">$19.99</p>
+            </div>
+            <!--END of Python code snippet-->
+
+            <div class="cart-item">
+                <div class="product-info">
+                    <img src="images/product.jpg" alt="Product 1">
+                    <div>
+                        <h4>Product Name</h4>
+                        <p>Product ID: 12345</p>
+                        <p>Quantity: 1</p>
+                        <p>Unit Price: $19.99</p>
+                    </div>
+                </div>
+                <div class="quantity-actions">
+                    <button class="remove">Remove</button>
+                    <button class="decrement">-</button>
+                    <input class="quantity" type="number" value="1" min="1">
+                    <button class="increment">+</button>
+                </div>
+                <p class="price">$19.99</p>
+            </div>
+            <!--END of DEMO code-->
+        </section>
+
+        <!--Information here needs to be calculated based on items in cart-->
+        <div class="cart-summary">
+            <p class="subtotal">Subtotal: $00.00</p>
+            <p class="shipping-cost">Shipping: $00.00</p>
+            <p class="total-price">Total: $00.00</p>
+            <button class="checkout-button">Proceed to Checkout</button>
+        </div>
+    </div>
+</main>
+
+    <footer>
+        <p>&copy; Company Name</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
